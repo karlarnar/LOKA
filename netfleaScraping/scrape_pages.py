@@ -5,7 +5,7 @@ import requests
 # BeautifulSoup is used to extract information from html
 from bs4 import BeautifulSoup
 
-def getPageLinks(firstPartLink, secondPartLink, numberPages, pagesClass):
+def getPageLinks(firstPartLink, numberPages, pagesClass):
     # setting headers in case the website is checking the header
     headers = requests.utils.default_headers()
     headers.update({ "User-Agent": "Mozilla/5.0 \

@@ -8,40 +8,30 @@ import scrape_products as scrape_products
 # edit these before running program
 # change to True to run scraper for given category
 women = True
-men = True
-boys = True
-girls = True
+men = False
+kids = False
 scrapePages = True # if we want to scrape pages
 scrapeProducts = True # if we want to scrape products
-csvName = "Oxfam_Dataset.csv" # name of csv file
+csvName = "Netflea_Dataset.csv" # name of csv file
 
 # change the name to reflect on class names
-pagesClass = "product-result-item"
-attributesClass = "product-attributes clearfix"
-imagesClass = "sm sm-product-details-gallery-v2 clearfix image-gallery zoomable"
+pagesClass = "products-grid"
+attributesClass = "product-attributes"
+imagesClass = "product-image"
 
 # each url for 4each page is the same except for the page number
-# we will be splitting the url in two, and adding each page number
-# in between to loop through them
-womenFirstPartLink = "https://www.oxfam.org.uk/shop/womens-clothing/all?i=1;m_sort_shops=FirstMadeLive;page="
-womenSecondPartLink = ";q=*;q1=Women%27s;show_all=products;x1=secondary_cat_1"
-womenNumberOfPages = 268 # 268 number of pages within category, change to 1 if testing
+womenFirstPartLink = "https://www.netflea.com/womens-clothing.html?limit=100&p="
+womenNumberOfPages = 1 #595 # ceiling(59429/100)
 womenPagesName = "women_pages" # name of txt file to save
 
-menFirstPartLink = "https://www.oxfam.org.uk/shop/mens-clothing/all?i=1;m_sort_shops=FirstMadeLive;page="
-menSecondPartLink = ";q=*;q1=men%27s;show_all=products;x1=secondary_cat_1"
-menNumberOfPages = 71 # 71 number of pages within category, change to 1 if testing
+menFirstPartLink = "https://www.netflea.com/mens-clothing.html?limit=100&p="
+menNumberOfPages = 1 #91 # ceiling(9010/100)
 menPagesName = "men_pages"
 
-girlsFirstPartLink = "https://www.oxfam.org.uk/shop/kids-clothing/girls-clothing?i=1;m_sort_shops=FirstMadeLive;page="
-girlsSecondPartLink = ";q=*;q1=Kids;q2=Girls%27+clothing;show_all=products;sp_s=productcreationdate;x1=secondary_cat_1;x2=secondary_cat_2"
-girlsNumberOfPages = 4 # 4 number of pages within category, change to 1 if testing
-girlsPagesName = "girls_pages"
-
-boysFirstPartLink = "https://www.oxfam.org.uk/shop/kids-clothing/boys-clothing?i=1;m_sort_shops=FirstMadeLive;page="
-boysSecondPartLink = ";q=*;q1=Kids;q2=Boys%27+clothing;show_all=products;sp_s=productcreationdate;x1=secondary_cat_1;x2=secondary_cat_2"
-boysNumberOfPages = 3 # 3 number of pages within category, change to 1 if testing
-boysPagesName = "boys_pages"
+#https://www.netflea.com/childrens-clothing.html?limit=100&p=2
+kidsFirstPartLink = "https://www.netflea.com/childrens-clothing.html?limit=100&p="
+kidsNumberOfPages = 1 #393 # ceiling(39295/100)
+kidsPagesName = "kids_pages"
 
 ########################################################################################
 
@@ -86,34 +76,19 @@ if men:
         print("Scraping products of men done")
     print("Men scraping ending...")
 
-if girls:
-    print("Girls scraping beginning...")
+if kids:
+    print("Kids scraping beginning...")
 
-    helper_functions.createTXT(girlsPagesName)
-
-    if scrapePages:
-        girlsList = scrape_pages.getPageLinks(girlsFirstPartLink, girlsSecondPartLink, girlsNumberOfPages, pagesClass)
-        helper_functions.writingListToTXT(girlsPagesName, girlsList)
-        print("Scraping pages of girls done")
-    
-    if scrapeProducts:
-        scrape_products.scrapeToCSV(girlsPagesName, attributesClass, imagesClass, csvName)
-        print("Scraping products of girls done")
-    print("Girls scraping ending...")
-
-if boys:
-    print("Boys scraping beginning...")
-
-    helper_functions.createTXT(boysPagesName)
+    helper_functions.createTXT(kidsPagesName)
 
     if scrapePages:
-        boysList = scrape_pages.getPageLinks(boysFirstPartLink, boysSecondPartLink, boysNumberOfPages, pagesClass)
-        helper_functions.writingListToTXT(boysPagesName, boysList)
-        print("Scraping pages of boys done")
+        kidsList = scrape_pages.getPageLinks(kidsFirstPartLink, kidsNumberOfPages, pagesClass)
+        helper_functions.writingListToTXT(kidsPagesName, kidsList)
+        print("Scraping pages of kids done")
     
     if scrapeProducts:
-        scrape_products.scrapeToCSV(boysPagesName, attributesClass, imagesClass, csvName)
-        print("Scraping products of boys done")
-    print("Boys scraping ending...")
+        scrape_products.scrapeToCSV(kidsPagesName, attributesClass, imagesClass, csvName)
+        print("Scraping products of kids done")
+    print("Kids scraping ending...")
 
 print("All done")

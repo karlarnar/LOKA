@@ -10,14 +10,14 @@ import csv
 
 def firstCSV(csvName):
     f = csv.writer(open(csvName, "w"))
-    f.writerow(["Type", "Colour", "Brand", "Exact Colour", "Title", "Img name", "Img src"])
+    f.writerow(["Type", "Brand", "Colour", "Img name", "Img src"])
     print("Writing csv headers done")
 
 
 # get_attribute takes in a soup html and the attribute we want
 # to extract information from and returns the value for the attribute
 def get_attribute(soup, attr):
-
+    """
     # finding attribute within dt tag
     prodAttr = soup.find("dt", string=attr)
     retAttr = ""
@@ -36,6 +36,7 @@ def get_attribute(soup, attr):
         # we want to cut out the <dt> and </dt>
         retAttr = str(sibling)[4:-5]
     return retAttr
+    """
 
 def createTXT(fileName):
     txtName = fileName + ".txt"
@@ -46,7 +47,7 @@ def writingListToTXT(fileName, lst):
     txtName = fileName + ".txt"
     with open(txtName, "a") as f:
         for l in lst: 
-            f.write("https://www.oxfam.org.uk%s\n" % l)
+            f.write("https://www.netflea.com%s\n" % l)
     print("Writing list to " + txtName + " done")
 
 def txtToList(fileName):
