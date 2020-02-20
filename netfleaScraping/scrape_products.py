@@ -11,7 +11,7 @@ import csv
 # our own module
 import helper_functions as helper_functions
 
-def scrapeToCSV(link, csvName):
+def scrapeToCSV(link, csvName, imagesPath):
     # opening the csv file
     f = csv.writer(open(csvName, "a"))
     print("Opened csv file")
@@ -34,15 +34,14 @@ def scrapeToCSV(link, csvName):
 
     # we only want to add the image url if it exists, else return an empty string
     if prodImage:
-        imgStr = str(prodImage["href"])
         imgName = str(prodImage["href"])
+        helper_functions.wget_image(imgName, imagesPath)
     else:
-        imgStr = ""
         imgName = ""
     print("Finding image done")
     
     # writing a new row to csv with new information
-    f.writerow([prodType, prodBrand, prodColour, imgStr, imgName])
+    f.writerow([prodType, prodBrand, prodColour, imgName])
     print("Writing row to csv done")
 
         

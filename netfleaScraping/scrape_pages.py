@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup
 
 import scrape_products
 
-def getPageLinks(firstPartLink, numberPages, csvName):
+def getPageLinks(firstPartLink, numberPages, csvName, imagesPath):
     # setting headers in case the website is checking the header
     headers = requests.utils.default_headers()
     headers.update({ "User-Agent": "Mozilla/5.0 \
@@ -31,10 +31,11 @@ def getPageLinks(firstPartLink, numberPages, csvName):
 
         # need to find all
         
-        prodLink = soup.find("h2", {"class":"product-name"})
-        prodHref = prodLink.find("a", href=True)
-        
-        scrape_products.scrapeToCSV(prodHref["href"], csvName)
+        prodLink = soup.findAll("h2", {"class":"product-name"})
+
+        for p in prodLink:
+            prodHref = p.find("a", href=True)
+            scrape_products.scrapeToCSV(prodHref["href"], csvName, imagesPath)
 
         print("All links added for page " + str(page))
     print("All links added to list, returning list")

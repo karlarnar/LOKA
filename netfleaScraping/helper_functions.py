@@ -4,13 +4,16 @@ from bs4 import BeautifulSoup
 # Path is used to create files on the system
 from pathlib import Path
 
+# os used for wget
+import os
+
 # csv is used to work with csv files, we will use it now to create the csv
 # and adding the header
 import csv
 
-def firstCSV(csvName):
+def first_CSV(csvName):
     f = csv.writer(open(csvName, "w"))
-    f.writerow(["Type", "Brand", "Colour", "ImgName", "ImgSrc"])
+    f.writerow(["Type", "Brand", "Colour", "ImgName"])
     print("Writing csv headers done")
 
 
@@ -26,3 +29,15 @@ def get_attribute(soup, attr):
                 return attrVal.text.strip()
             else:
                 return ""
+
+def setting_image_path():
+    imagesFolder = Path.cwd().joinpath('images')
+    imagesFolder.mkdir(parents=True, exist_ok=True)
+    return imagesFolder
+
+def wget_image(url, imagesPath):
+    try:
+        wgetStr = "wget -P " + str(imagesPath) + " " + url
+        os.system(wgetStr)
+    except OSError as e:
+        print("Failed to wget " + str(imagesPath), e.strerror)
