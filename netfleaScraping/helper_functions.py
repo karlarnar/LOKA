@@ -17,26 +17,15 @@ def firstCSV(csvName):
 # get_attribute takes in a soup html and the attribute we want
 # to extract information from and returns the value for the attribute
 def get_attribute(soup, attr):
-    """
-    # finding attribute within dt tag
-    prodAttr = soup.find("dt", string=attr)
-    retAttr = ""
-
-    # if there is no attribute, then we will return an empty string
-    if prodAttr:
-
-        # if we find the attribute, we want to find the dd tag for that
-        # attribute, which is the value for that attribute
-        siblings = prodAttr.find_next_siblings("dd")
-
-        # find_next_siblings returns a list of all siblings that come
-        # after the dt tag, we only want the first one
-        sibling = siblings[0]
-
-        # we want to cut out the <dt> and </dt>
-        retAttr = str(sibling)[4:-5]
-    return retAttr
-    """
+    
+    for p in soup:
+        prodAttr = p.find("div", string=attr)
+        if prodAttr:
+            attrVal = p.find("span", {"class": "outeratc"})
+            if attrVal:
+                return attrVal.text.strip()
+            else:
+                return ""
 
 def createTXT(fileName):
     txtName = fileName + ".txt"

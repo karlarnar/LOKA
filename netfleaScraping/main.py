@@ -16,7 +16,7 @@ csvName = "Netflea_Dataset.csv" # name of csv file
 
 # change the name to reflect on class names
 pagesClass = "item"
-attributesClass = "product-attributes"
+attributesClass = "attribute-wrapper"
 imagesClass = "product-image"
 
 # each url for 4each page is the same except for the page number
@@ -52,7 +52,7 @@ if women:
         # writing to txt file we created earlier
         helper_functions.writingListToTXT(womenPagesName, womenList)
         print("Scraping pages of women done")
-    """
+    
     # if we need to scrape products, else skip
     if scrapeProducts:
 
@@ -60,7 +60,7 @@ if women:
         scrape_products.scrapeToCSV(womenPagesName, attributesClass, imagesClass, csvName)
         print("Scraping products of women done")
     print("Women scraping ending...")
-    """
+    
 if men:
     print("Men scraping beginning...")
 
