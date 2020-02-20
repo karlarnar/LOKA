@@ -10,7 +10,7 @@ import csv
 
 def firstCSV(csvName):
     f = csv.writer(open(csvName, "w"))
-    f.writerow(["Type", "Brand", "Colour", "Img name", "Img src"])
+    f.writerow(["Type", "Brand", "Colour", "ImgName", "ImgSrc"])
     print("Writing csv headers done")
 
 
@@ -47,7 +47,7 @@ def writingListToTXT(fileName, lst):
     txtName = fileName + ".txt"
     with open(txtName, "a") as f:
         for l in lst: 
-            f.write("https://www.netflea.com%s\n" % l)
+            f.write("%s\n" % l)
     print("Writing list to " + txtName + " done")
 
 def txtToList(fileName):

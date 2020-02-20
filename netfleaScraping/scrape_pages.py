@@ -16,7 +16,7 @@ def getPageLinks(firstPartLink, numberPages, pagesClass):
     for page in range(1, numberPages + 1):
 
         # we will need to build a link that represents the url
-        link = firstPartLink + str(page) + secondPartLink
+        link = firstPartLink + str(page)
 
         # we will need to send a request to that page and
         # get back a html response, we will use BeautifulSoup
@@ -27,10 +27,9 @@ def getPageLinks(firstPartLink, numberPages, pagesClass):
         html = response.content
         soup = BeautifulSoup(html, "html.parser")
 
-        for s in soup.find_all("li", {"class": pagesClass}):
-            foundHref = s.find("a", href=True)
-            retList.append(foundHref["href"])
-        
+        for link in soup("a", "product-image", href=True):
+            retList.append(link["href"])
+
         print("All links added for page " + str(page))
     print("All links added to list, returning list")
     return retList

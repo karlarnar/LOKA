@@ -10,12 +10,12 @@ import scrape_products as scrape_products
 women = True
 men = False
 kids = False
-scrapePages = True # if we want to scrape pages
+scrapePages = False # if we want to scrape pages
 scrapeProducts = True # if we want to scrape products
 csvName = "Netflea_Dataset.csv" # name of csv file
 
 # change the name to reflect on class names
-pagesClass = "products-grid"
+pagesClass = "item"
 attributesClass = "product-attributes"
 imagesClass = "product-image"
 
@@ -47,12 +47,12 @@ if women:
         helper_functions.createTXT(womenPagesName)
         
         # getting a list of all urls for products
-        womenList = scrape_pages.getPageLinks(womenFirstPartLink, womenSecondPartLink, womenNumberOfPages, pagesClass)
+        womenList = scrape_pages.getPageLinks(womenFirstPartLink, womenNumberOfPages, pagesClass)
         
         # writing to txt file we created earlier
         helper_functions.writingListToTXT(womenPagesName, womenList)
         print("Scraping pages of women done")
-    
+    """
     # if we need to scrape products, else skip
     if scrapeProducts:
 
@@ -60,7 +60,7 @@ if women:
         scrape_products.scrapeToCSV(womenPagesName, attributesClass, imagesClass, csvName)
         print("Scraping products of women done")
     print("Women scraping ending...")
-
+    """
 if men:
     print("Men scraping beginning...")
 
