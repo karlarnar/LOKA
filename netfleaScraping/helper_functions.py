@@ -26,24 +26,3 @@ def get_attribute(soup, attr):
                 return attrVal.text.strip()
             else:
                 return ""
-
-def createTXT(fileName):
-    txtName = fileName + ".txt"
-    txtPath = Path(txtName)
-    txtPath.touch(exist_ok=True)
-
-def writingListToTXT(fileName, lst):
-    txtName = fileName + ".txt"
-    with open(txtName, "a") as f:
-        for l in lst: 
-            f.write("%s\n" % l)
-    print("Writing list to " + txtName + " done")
-
-def txtToList(fileName):
-    retList = []
-    txtName = fileName + ".txt"
-    with open(txtName, "r") as f:
-        for line in f:
-            currLine = line[:-1] # removing linebreak
-            retList.append(currLine)
-    return retList

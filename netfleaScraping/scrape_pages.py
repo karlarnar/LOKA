@@ -5,7 +5,9 @@ import requests
 # BeautifulSoup is used to extract information from html
 from bs4 import BeautifulSoup
 
-def getPageLinks(firstPartLink, numberPages, pagesClass):
+import scrape_products
+
+def getPageLinks(firstPartLink, numberPages, csvName):
     # setting headers in case the website is checking the header
     headers = requests.utils.default_headers()
     headers.update({ "User-Agent": "Mozilla/5.0 \
@@ -27,8 +29,12 @@ def getPageLinks(firstPartLink, numberPages, pagesClass):
         html = response.content
         soup = BeautifulSoup(html, "html.parser")
 
-        for link in soup("a", "product-image", href=True):
-            retList.append(link["href"])
+        # need to find all
+        
+        prodLink = soup.find("h2", {"class":"product-name"})
+        prodHref = prodLink.find("a", href=True)
+        
+        scrape_products.scrapeToCSV(prodHref["href"], csvName)
 
         print("All links added for page " + str(page))
     print("All links added to list, returning list")

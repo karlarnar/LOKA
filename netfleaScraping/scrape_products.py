@@ -11,46 +11,38 @@ import csv
 # our own module
 import helper_functions as helper_functions
 
-def scrapeToCSV(txtName, attributeClass, imageClass, csvName):
-
-    
-
+def scrapeToCSV(link, csvName):
     # opening the csv file
     f = csv.writer(open(csvName, "a"))
     print("Opened csv file")
-
-    # getting the txt file we created in scrape_pages to list so we can loop through it
-    lst = helper_functions.txtToList(txtName)
-
-    for product in lst:
         
-        page = requests.get(product)
-        soup = BeautifulSoup(page.text, "html.parser")
-        
-        # find product attributes
-        prodAttr = soup.findAll(class_=attributeClass)
+    page = requests.get(link)
+    soup = BeautifulSoup(page.text, "html.parser")
+    
+    # find product attributes
+    prodAttr = soup.findAll(class_="attribute-wrapper")
 
-        # find type, colour, brand, exact colour, title
-        prodType = helper_functions.get_attribute(prodAttr, "Type")
-        prodBrand = helper_functions.get_attribute(prodAttr, "Brand")
-        prodColour = helper_functions.get_attribute(prodAttr, "Color")
-        print("Finding attributes done")
-        
-        # find image
-        prodImages = soup.find(class_=imageClass)
-        prodImage = prodImages.find("a", {"class": "cloud-zoom"})
+    # find type, colour, brand, exact colour, title
+    prodType = helper_functions.get_attribute(prodAttr, "Type")
+    prodBrand = helper_functions.get_attribute(prodAttr, "Brand")
+    prodColour = helper_functions.get_attribute(prodAttr, "Color")
+    print("Finding attributes done")
+    
+    # find image
+    prodImages = soup.find(class_="product-image")
+    prodImage = prodImages.find("a", {"class": "cloud-zoom"})
 
-        # we only want to add the image url if it exists, else return an empty string
-        if prodImage:
-            imgStr = str(prodImage["href"])
-            imgName = str(prodImage["href"])
-        else:
-            imgStr = ""
-            imgName = ""
-        print("Finding image done")
-        
-        # writing a new row to csv with new information
-        f.writerow([prodType, prodBrand, prodColour, imgStr, imgName])
-        print("Writing row to csv done")
+    # we only want to add the image url if it exists, else return an empty string
+    if prodImage:
+        imgStr = str(prodImage["href"])
+        imgName = str(prodImage["href"])
+    else:
+        imgStr = ""
+        imgName = ""
+    print("Finding image done")
+    
+    # writing a new row to csv with new information
+    f.writerow([prodType, prodBrand, prodColour, imgStr, imgName])
+    print("Writing row to csv done")
 
         
