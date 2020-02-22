@@ -8,20 +8,20 @@ import scrape_products as scrape_products
 # edit these before running program
 # change to True to run scraper for given category
 women = True
-men = False
-kids = False
+men = True
+kids = True
 csvName = "Netflea_Dataset.csv" # name of csv file
 
 # each url for 4each page is the same except for the page number
 womenFirstPartLink = "https://www.netflea.com/womens-clothing.html?limit=100&p="
-womenNumberOfPages = 1 #595 # ceiling(numberofitems/100)
+womenNumberOfPages = 550 #595 # ceiling(numberofitems/100)
 
 menFirstPartLink = "https://www.netflea.com/mens-clothing.html?limit=100&p="
-menNumberOfPages = 1 #91 # ceiling(numberofitems/100)
+menNumberOfPages = 80 #91 # ceiling(numberofitems/100)
 
 #https://www.netflea.com/childrens-clothing.html?limit=100&p=2
 kidsFirstPartLink = "https://www.netflea.com/childrens-clothing.html?limit=100&p="
-kidsNumberOfPages = 1 #393 # ceiling(numberofitems/100)
+kidsNumberOfPages = 370 #393 # ceiling(numberofitems/100)
 
 ########################################################################################
 

@@ -30,15 +30,20 @@ def scrapeToCSV(link, csvName, imagesPath):
     
     # find image
     prodImages = soup.find(class_="product-image")
-    prodImage = prodImages.find("a", {"class": "cloud-zoom"})
+    if prodImages:
+        prodImage = prodImages.find("a", {"class": "cloud-zoom"})
 
-    # we only want to add the image url if it exists, else return an empty string
-    if prodImage:
-        imgName = str(prodImage["href"])
-        helper_functions.wget_image(imgName, imagesPath)
+        if prodImage:
+            imgName = str(prodImage["href"])
+            helper_functions.wget_image(imgName, imagesPath)
+        else:
+            imgName = ""
+        print("Finding image done")
     else:
         imgName = ""
-    print("Finding image done")
+
+    # we only want to add the image url if it exists, else return an empty string
+    
     
     # writing a new row to csv with new information
     f.writerow([prodType, prodBrand, prodColour, imgName])

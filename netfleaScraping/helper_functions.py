@@ -20,15 +20,22 @@ def first_CSV(csvName):
 # get_attribute takes in a soup html and the attribute we want
 # to extract information from and returns the value for the attribute
 def get_attribute(soup, attr):
-    
-    for p in soup:
-        prodAttr = p.find("div", string=attr)
-        if prodAttr:
-            attrVal = p.find("span", {"class": "outeratc"})
-            if attrVal:
-                return attrVal.text.strip()
+    if soup:
+        for p in soup:
+            prodAttr = p.find("div", string=attr)
+            if prodAttr:
+                attrVal = p.find("span", {"class": "outeratc"})
+                if attrVal:
+                    return attrVal.text.strip()
+                else:
+                    return ""
             else:
                 return ""
+    else:
+        return ""
+
+
+    
 
 def setting_image_path():
     imagesFolder = Path.cwd().joinpath('images')

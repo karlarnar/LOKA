@@ -33,9 +33,11 @@ def getPageLinks(firstPartLink, numberPages, csvName, imagesPath):
         
         prodLink = soup.findAll("h2", {"class":"product-name"})
 
-        for p in prodLink:
-            prodHref = p.find("a", href=True)
-            scrape_products.scrapeToCSV(prodHref["href"], csvName, imagesPath)
+        if prodLink:
+            for p in prodLink:
+                prodHref = p.find("a", href=True)
+                if prodHref:
+                    scrape_products.scrapeToCSV(prodHref["href"], csvName, imagesPath)
 
         print("All links added for page " + str(page))
     print("All links added to list, returning list")
