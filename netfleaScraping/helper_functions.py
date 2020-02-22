@@ -29,8 +29,6 @@ def get_attribute(soup, attr):
                     return attrVal.text.strip()
                 else:
                     return ""
-            else:
-                return ""
     else:
         return ""
 

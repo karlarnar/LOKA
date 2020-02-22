@@ -26,7 +26,6 @@ def scrapeToCSV(link, csvName, imagesPath):
     prodType = helper_functions.get_attribute(prodAttr, "Type")
     prodBrand = helper_functions.get_attribute(prodAttr, "Brand")
     prodColour = helper_functions.get_attribute(prodAttr, "Color")
-    print("Finding attributes done")
     
     # find image
     prodImages = soup.find(class_="product-image")
