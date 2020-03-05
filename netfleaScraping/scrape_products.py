@@ -47,5 +47,3 @@ def scrapeToCSV(link, csvName, imagesPath):
     # writing a new row to csv with new information
     f.writerow([prodType, prodBrand, prodColour, imgName])
     print("Writing row to csv done")
-
-        

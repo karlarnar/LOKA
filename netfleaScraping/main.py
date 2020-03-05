@@ -7,7 +7,7 @@ import scrape_products as scrape_products
 
 # edit these before running program
 # change to True to run scraper for given category
-women = True
+women = False
 men = True
 kids = True
 csvName = "Netflea_Dataset.csv" # name of csv file
@@ -38,7 +38,7 @@ if women:
 if men:
     print("Men scraping beginning...")
 
-    scrape_pages.getPageLinks(menFirstPartLink, menSecondPartLink, menNumberOfPages, imagesPath)
+    scrape_pages.getPageLinks(menFirstPartLink, menNumberOfPages, csvName, imagesPath)
     
     print("Men scraping ending...")
 
